@@ -11,7 +11,7 @@ import 'objects/user.dart';
 
 part 'api_client.g.dart';
 
-@RestApi(baseUrl: "https://cas.click7solutions.com/")
+@RestApi(baseUrl: "https://cas.click7solutions.com/main/")
 abstract class ApiClient {
   factory ApiClient(Dio dio, {String baseUrl}) = _ApiClient;
 

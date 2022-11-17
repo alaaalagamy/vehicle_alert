@@ -78,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       print(_passwordController.text);
                                       // print(isChecked);
 
-                                      sendDataLogin.userName = _emailController.text;
+                                      sendDataLogin.username = _emailController.text;
                                       sendDataLogin.password = _passwordController.text;
                                       // _UserLoginResponse = await loginUser();
                                       userLoginResponse = await loginUser();

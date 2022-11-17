@@ -8,13 +8,13 @@ part of 'api_client.dart';
 
 SendDataLogin _$SendDataLoginFromJson(Map<String, dynamic> json) =>
     SendDataLogin(
-      userName: json['userName'] as String?,
+      username: json['username'] as String?,
       password: json['password'] as String?,
     );
 
 Map<String, dynamic> _$SendDataLoginToJson(SendDataLogin instance) =>
     <String, dynamic>{
-      'userName': instance.userName,
+      'username': instance.username,
       'password': instance.password,
     };
 
@@ -39,7 +39,7 @@ class _ApiClient implements ApiClient {
     this._dio, {
     this.baseUrl,
   }) {
-    baseUrl ??= 'https://cas.click7solutions.com/';
+    baseUrl ??= 'https://cas.click7solutions.com/main/';
   }
 
   final Dio _dio;

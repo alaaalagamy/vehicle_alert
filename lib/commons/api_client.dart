@@ -39,11 +39,11 @@ abstract class ApiClient {
 
 @JsonSerializable()
 class SendDataLogin {
-  String? userName;
+  String? username;
   String? password;
 
   SendDataLogin({
-    this.userName,
+    this.username,
     this.password,
   });
 

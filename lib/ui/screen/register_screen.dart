@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
+import '../../commons/theme_helper.dart';
+
 
 
 class RegisterScreen extends StatefulWidget {
@@ -13,14 +15,20 @@ class RegisterScreen extends StatefulWidget {
 class _RegisterScreenState extends State<RegisterScreen> {
   final double _headerHeight = 250;
   final Key _formKey = GlobalKey<FormState>();
-  late TextEditingController _emailController;
-  late TextEditingController _passwordController;
+  late TextEditingController userNameController;
+  late TextEditingController passwordController;
+  late TextEditingController firstNameController;
+  late TextEditingController lastNameController;
+
 
   @override
   void initState() {
     super.initState();
-    _emailController = TextEditingController();
-    _passwordController = TextEditingController();
+    userNameController = TextEditingController();
+    passwordController = TextEditingController();
+    firstNameController = TextEditingController();
+    lastNameController = TextEditingController();
+
   }
 
   @override
@@ -39,9 +47,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       const Padding(
                         padding: EdgeInsets.all(20.0),
                         child: Image(
-                            image: AssetImage('assets/images/logo2.png')
+                            image: AssetImage('assets/images/header.png')
                         ),
                       ),
+
 
 
                       const SizedBox(height: 20.0),
@@ -51,17 +60,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             children: [
                               Container(
                                 child: TextField(
-                                  controller: _emailController,
-
+                                  controller: userNameController,
+                                  decoration: ThemeHelper().textInputDecoration(
+                                      'User Name', 'Enter your user name'),
                                 ),
                               ),
                               const SizedBox(height: 15.0),
 
                               Container(
                                 child: TextField(
-                                  controller: _passwordController,
+                                  controller: passwordController,
                                   obscureText: true,
-
+                                  decoration: ThemeHelper().textInputDecoration(
+                                      'Password', 'Enter your password'),
                                 ),
                               ),
 
@@ -69,37 +80,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                               Container(
                                 child: TextField(
-                                  controller: _emailController,
-
+                                  controller: firstNameController,
+                                  decoration: ThemeHelper().textInputDecoration(
+                                      'FIRST Name', 'Enter your first name'),
                                 ),
                               ),
                               const SizedBox(height: 15.0),
 
                               Container(
                                 child: TextField(
-                                  controller: _emailController,
-
+                                  controller: lastNameController,
+                                  decoration: ThemeHelper().textInputDecoration(
+                                      'LAST Name', 'Enter your last name'),
                                 ),
                               ),
                               const SizedBox(height: 15.0),
 
                               Container(
-                                child: TextField(
-                                  controller: _emailController,
-
-                                ),
-                              ),
-                              const SizedBox(height: 15.0),
-
-
-                              Container(
-                                child: TextField(
-
-                                ),
-                              ),
-                              const SizedBox(height: 15.0),
-                              Container(
+                                decoration:
+                                ThemeHelper().buttonBoxDecoration(context),
                                 child: ElevatedButton(
+                                  style: ThemeHelper().buttonStyle(),
                                   child: Padding(
                                     padding: const EdgeInsets.fromLTRB(
                                         40, 10, 40, 10),
@@ -111,8 +112,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           color: Colors.white),
                                     ),
                                   ),
-                                  onPressed: () {},
-                              ),
+                                  // onPressed: () {},
+                                  onPressed: () async {
+                                    // Navigator.pushReplacement(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) =>
+                                    //         const MainScreen()));
+
+                                    //After successful login we will redirect to profile page. Let's create profile page now
+                                  },
+                                ),
                               ),
                             ],
                           )),

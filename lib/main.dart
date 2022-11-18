@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false, // delete debug banner
-      home:MainScreen(),
-      // home: SplashScreen(),
+      // home:MainScreen(),
+      home: SplashScreen(),
     );
   }
 }

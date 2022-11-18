@@ -2,8 +2,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:vehicle_alert/ui/screen/register_screen.dart';
 
 import '../../commons/api_client.dart';
+import '../../commons/theme_helper.dart';
 import 'main_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -33,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffDDDDDD),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -55,12 +57,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                 margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                                 child: TextField(
                                   controller: _emailController,
+                                  decoration: ThemeHelper().textInputDecoration('User Name', 'Enter your name'),
+
                                 ),
                               ),
                               Container(
                                 margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                                 child: TextField(
                                   controller: _passwordController,
+                                  decoration: ThemeHelper().textInputDecoration('Password', 'Enter your password'),
                                   obscureText: true,
                                 ),
                               ),
@@ -83,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       // _UserLoginResponse = await loginUser();
                                       userLoginResponse = await loginUser();
 
-                                      print(userLoginResponse.toString());
+                                      print(userLoginResponse.user?.fullname);
 
                                       if (userLoginResponse.user?.token != null) {
                                         print(userLoginResponse.user?.token) ;
@@ -110,17 +115,16 @@ class _LoginScreenState extends State<LoginScreen> {
                               Container(
                                 margin: const EdgeInsets.fromLTRB(0, 30, 0, 0),
                                 child: GestureDetector(
-                                  onTap: () {},
-                                  // onTap: () {
-                                  //   Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             ForgotPasswordPage()),
-                                  //   );
-                                  // },
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              RegisterScreen()),
+                                    );
+                                  },
                                   child: Text(
-                                    "Forgot password?".toUpperCase(),
+                                    "no account ? signup".toUpperCase(),
                                     style: const TextStyle(fontSize: 20, color: Colors.black, fontFamily: 'Poppins-Italic'),
                                   ),
                                 ),

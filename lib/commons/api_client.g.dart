@@ -20,9 +20,8 @@ Map<String, dynamic> _$SendDataLoginToJson(SendDataLogin instance) =>
 
 UserLoginResponse _$UserLoginResponseFromJson(Map<String, dynamic> json) =>
     UserLoginResponse(
-      user: json['user'] == null
-          ? null
-          : User.fromJson(json['user'] as Map<String, dynamic>),
+      user :
+          User.fromJson(json as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$UserLoginResponseToJson(UserLoginResponse instance) =>
@@ -48,24 +47,20 @@ class _ApiClient implements ApiClient {
 
   @override
   Future<UserLoginResponse> loginUser(sendDataLogin) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(sendDataLogin.toJson());
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<UserLoginResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              'login/',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final _result = await _dio.post('${baseUrl}login/' , data: sendDataLogin.toJson());
+    //     .fetch<Map<String, dynamic>>(_setStreamType<UserLoginResponse>(Options(
+    //   method: 'POST',
+    //   // headers: _headers,
+    //   // extra: _extra,
+    // )
+    //         .compose(
+    //           _dio.options,
+    //           'login/',
+    //           queryParameters: queryParameters,
+    //           data: _data,
+    //         )
+    //         .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    print(_result);
     final value = UserLoginResponse.fromJson(_result.data!);
     return value;
   }

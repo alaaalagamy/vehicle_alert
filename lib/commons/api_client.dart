@@ -18,6 +18,9 @@ abstract class ApiClient {
   @POST("login/")
   Future<UserLoginResponse> loginUser(@Body() SendDataLogin sendDataLogin);
 
+  @POST("add_user/")
+  Future<UserLoginResponse> addUser(@Body() SendDataSignup sendDataSignup);
+
   // @GET("items/")
   // Future<List<ImagesAndVideos>> getImagesAndVideos();
   //
@@ -36,6 +39,22 @@ abstract class ApiClient {
   // @GET("devices/")
   // Future<List<Device>> getDevices();
 }
+@JsonSerializable()
+class SendDataSignup {
+  String? username;
+  String? password;
+  String? email;
+
+  SendDataSignup({
+    this.username,
+    this.password,
+    this.email,
+  });
+
+  factory SendDataSignup.fromJson(Map<String, dynamic> json) => _$SendDataSignupFromJson(json);
+  Map<String, dynamic> toJson() => _$SendDataSignupToJson(this);
+}
+
 
 @JsonSerializable()
 class SendDataLogin {

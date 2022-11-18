@@ -1,7 +1,11 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../commons/api_client.dart';
 import '../../commons/theme_helper.dart';
+import 'main_screen.dart';
 
 
 
@@ -14,11 +18,16 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   final double _headerHeight = 250;
+  String errorMessage = "";
   final Key _formKey = GlobalKey<FormState>();
   late TextEditingController userNameController;
   late TextEditingController passwordController;
-  late TextEditingController firstNameController;
-  late TextEditingController lastNameController;
+  late TextEditingController emailController;
+
+  final ApiClient _clien = ApiClient(Dio(BaseOptions(contentType: "application/json")));
+  final sendDataSignup = SendDataSignup();
+  late var userLoginResponse = UserLoginResponse();
+
 
 
   @override
@@ -26,8 +35,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     super.initState();
     userNameController = TextEditingController();
     passwordController = TextEditingController();
-    firstNameController = TextEditingController();
-    lastNameController = TextEditingController();
+    emailController = TextEditingController();
 
   }
 
@@ -80,20 +88,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                               Container(
                                 child: TextField(
-                                  controller: firstNameController,
+                                  controller: emailController,
                                   decoration: ThemeHelper().textInputDecoration(
-                                      'FIRST Name', 'Enter your first name'),
+                                      'Email', 'Enter your email'),
                                 ),
                               ),
-                              const SizedBox(height: 15.0),
 
-                              Container(
-                                child: TextField(
-                                  controller: lastNameController,
-                                  decoration: ThemeHelper().textInputDecoration(
-                                      'LAST Name', 'Enter your last name'),
-                                ),
-                              ),
                               const SizedBox(height: 15.0),
 
                               Container(
@@ -113,15 +113,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                     ),
                                   ),
                                   // onPressed: () {},
-                                  onPressed: () async {
-                                    // Navigator.pushReplacement(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) =>
-                                    //         const MainScreen()));
+                                    onPressed: () async {
 
-                                    //After successful login we will redirect to profile page. Let's create profile page now
-                                  },
+                                      sendDataSignup.username = userNameController.text;
+                                      sendDataSignup.password = passwordController.text;
+                                      sendDataSignup.email = emailController.text;
+                                      // _UserLoginResponse = await loginUser();
+                                      userLoginResponse = await signUpUser();
+
+                                      print(userLoginResponse.user?.fullname);
+
+                                      if (userLoginResponse.user?.token != null) {
+                                        print(userLoginResponse.user?.token) ;
+                                        // Amr change here, I will save the token as a global variable to access it from different places
+                                        // SharedValues.user = userLoginResponse.user;
+                                        // SharedValues.userEmail = sendDataLogin.userName;
+                                        // SharedValues.userPass = sendDataLogin.password;
+
+                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MainScreen()));
+                                      } else {
+                                        Fluttertoast.showToast(
+                                            msg: "Error : $errorMessage",
+                                            toastLength: Toast.LENGTH_SHORT,
+                                            gravity: ToastGravity.BOTTOM,
+                                            timeInSecForIosWeb: 1,
+                                            backgroundColor: const Color(0xff707070),
+                                            textColor: Colors.white,
+                                            fontSize: 18.0);
+                                        //x = _UserLoginResponse.Message.toString();
+                                      }
+                                    }
                                 ),
                               ),
                             ],
@@ -134,4 +155,27 @@ class _RegisterScreenState extends State<RegisterScreen> {
       ),
     );
   }
+
+
+  Future<UserLoginResponse> signUpUser() async {
+    return await _clien.addUser(sendDataSignup).then((value) => userLoginResponse = value).catchError((e) {
+      int errorCode = 0;
+      errorMessage = "";
+      switch (e.runtimeType) {
+        case DioError:
+          final res = (e as DioError).response;
+          if (res != null) {
+            errorCode = res.statusCode!;
+            errorMessage = res.statusMessage!;
+          } else {
+            print("error ${e.message}");
+          }
+          print(errorCode);
+          print(errorMessage);
+          return userLoginResponse;
+        default:
+      }
+    });
+  }
 }
+

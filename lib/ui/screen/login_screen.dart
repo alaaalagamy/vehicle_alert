@@ -26,7 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    _emailController = TextEditingController(text: 'admin2@sdc.com');
+    _emailController = TextEditingController(text: 'msh');
     _passwordController = TextEditingController(text: '123');
   }
 
@@ -45,7 +45,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.all(20.0),
-                        child: Image( image: AssetImage('assets/images/logo_small.png')),
+                        child: Image( image: AssetImage('assets/images/header.png')),
                       ),
                       Form(
                           key: _formKey,
@@ -83,9 +83,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       // _UserLoginResponse = await loginUser();
                                       userLoginResponse = await loginUser();
 
-                                      print(userLoginResponse.user?.token);
+                                      print(userLoginResponse.toString());
 
                                       if (userLoginResponse.user?.token != null) {
+                                        print(userLoginResponse.user?.token) ;
                                         // Amr change here, I will save the token as a global variable to access it from different places
                                         // SharedValues.user = userLoginResponse.user;
                                         // SharedValues.userEmail = sendDataLogin.userName;

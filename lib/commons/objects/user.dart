@@ -1,28 +1,31 @@
+import 'package:json_annotation/json_annotation.dart';
+import 'package:retrofit/retrofit.dart';
+import 'package:dio/dio.dart';
+
 part 'user.g.dart';
 
+@JsonSerializable()
 class User {
   String? token;
-  String? firstName;
-  String? lastName;
+  String? first_name;
+  String? last_name;
   String? gender;
   String? gender_str;
   String? dob;
-  String? country;
   String? fullname;
   String? email;
   String? username;
 
   User(
-      {required this.token,
-      required this.firstName,
-      required this.lastName,
-      required this.gender,
-      required this.gender_str,
-      required this.dob,
-      required this.country,
-      required this.fullname,
-      required this.email,
-      required this.username
+      { this.token,
+       this.first_name,
+       this.last_name,
+       this.gender,
+       this.gender_str,
+       this.dob,
+       this.fullname,
+       this.email,
+       this.username
       });
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);

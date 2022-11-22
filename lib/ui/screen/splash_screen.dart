@@ -23,16 +23,27 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        body: Padding(
-          padding: const EdgeInsets.all(40.0),
-          child: Container(
-            alignment: Alignment.center,
-            child: const Image(
-              image:  AssetImage('assets/images/logo2.png'),
-            ),
-          ),
-        )
+        body: Stack(
+            children: [
 
-    );
+              //align to top center using Container();
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 50,horizontal: 20),
+                child: Container(
+                    alignment: Alignment.center,
+                    child: Image( image: AssetImage('assets/images/logo2.png'))),
+              ),
+
+
+
+              //manual position with left, top, right, bottom
+              const Align(
+                alignment: Alignment.bottomCenter,
+                child:  Image( image: AssetImage('assets/images/bottom.png'),height: 40,width: double.infinity,fit: BoxFit.fill,),
+              ),
+
+
+            ]));
   }
+
 }

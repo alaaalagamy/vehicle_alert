@@ -123,25 +123,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
                                       print(userLoginResponse.user?.fullname);
 
-                                      if (userLoginResponse.user?.token != null) {
-                                        print(userLoginResponse.user?.token) ;
-                                        // Amr change here, I will save the token as a global variable to access it from different places
-                                        // SharedValues.user = userLoginResponse.user;
-                                        // SharedValues.userEmail = sendDataLogin.userName;
-                                        // SharedValues.userPass = sendDataLogin.password;
-
-                                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MainScreen()));
-                                      } else {
-                                        Fluttertoast.showToast(
-                                            msg: "Error : $errorMessage",
-                                            toastLength: Toast.LENGTH_SHORT,
-                                            gravity: ToastGravity.BOTTOM,
-                                            timeInSecForIosWeb: 1,
-                                            backgroundColor: const Color(0xff707070),
-                                            textColor: Colors.white,
-                                            fontSize: 18.0);
-                                        //x = _UserLoginResponse.Message.toString();
-                                      }
+                                      // if (userLoginResponse.user?.token != null) {
+                                      //   print(userLoginResponse.user?.token) ;
+                                      //   // Amr change here, I will save the token as a global variable to access it from different places
+                                      //   // SharedValues.user = userLoginResponse.user;
+                                      //   // SharedValues.userEmail = sendDataLogin.userName;
+                                      //   // SharedValues.userPass = sendDataLogin.password;
+                                      //
+                                      //   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MainScreen()));
+                                      // } else {
+                                      //   Fluttertoast.showToast(
+                                      //       msg: "Error : $errorMessage",
+                                      //       toastLength: Toast.LENGTH_SHORT,
+                                      //       gravity: ToastGravity.BOTTOM,
+                                      //       timeInSecForIosWeb: 1,
+                                      //       backgroundColor: const Color(0xff707070),
+                                      //       textColor: Colors.white,
+                                      //       fontSize: 18.0);
+                                      //   //x = _UserLoginResponse.Message.toString();
+                                      // }
                                     }
                                 ),
                               ),

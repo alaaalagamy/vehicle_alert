@@ -1,19 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
-import 'package:vehicle_alert/ui/screen/contacts_screen.dart';
-import 'package:vehicle_alert/ui/screen/history_screen.dart';
-import 'package:vehicle_alert/ui/screen/settings_screen.dart';
 
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+class ContactDetailsScreen extends StatefulWidget {
+  const ContactDetailsScreen({Key? key}) : super(key: key);
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  State<ContactDetailsScreen> createState() => _ContactDetailsScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _ContactDetailsScreenState extends State<ContactDetailsScreen> {
   final GlobalKey<State<StatefulWidget>> accountKey = GlobalKey();
 
 
@@ -57,8 +54,7 @@ class _MainScreenState extends State<MainScreen> {
                             ),
                             const SizedBox(height: 5,),
                             SizedBox(
-                              height: 90,
-                              width: 90,
+                              height: 100,
                               child: Padding(
                                 padding: const EdgeInsets.all(10),
                                 child: ClipOval(
@@ -67,12 +63,6 @@ class _MainScreenState extends State<MainScreen> {
                                     child: InkWell(
                                       splashColor: Colors.green, // splash color
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                              const SettingsScreen()),
-                                        );
                                       },
                                       child: const Image( image: AssetImage('assets/images/settings.png')),
                                     ),
@@ -91,8 +81,7 @@ class _MainScreenState extends State<MainScreen> {
                             ),
                             const SizedBox(height: 5,),
                             SizedBox(
-                              height: 90,
-                              width: 90,
+                              height: 100,
                               child: Padding(
                                 padding: const EdgeInsets.all(10),
                                 child: ClipOval(
@@ -101,12 +90,6 @@ class _MainScreenState extends State<MainScreen> {
                                     child: InkWell(
                                       splashColor: Colors.green, // splash color
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                              const ContactsScreen()),
-                                        );
                                       },
                                       child: const Image( image: AssetImage('assets/images/contacts.png')),
                                     ),
@@ -126,8 +109,7 @@ class _MainScreenState extends State<MainScreen> {
                             ),
                             const SizedBox(height: 5,),
                             SizedBox(
-                              height: 90,
-                              width: 90,
+                              height: 100,
                               child: Padding(
                                 padding: const EdgeInsets.all(10),
                                 child: ClipOval(
@@ -154,8 +136,7 @@ class _MainScreenState extends State<MainScreen> {
                             ),
                             const SizedBox(height: 5,),
                             SizedBox(
-                              height: 90,
-                              width: 90,
+                              height: 100,
                               child: Padding(
                                 padding: const EdgeInsets.all(10),
                                 child: Material(
@@ -163,12 +144,6 @@ class _MainScreenState extends State<MainScreen> {
                                   child: InkWell(
                                     splashColor: Colors.green, // splash color
                                     onTap: () {
-                                      Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const HistoryScreen()),
-                                      );
                                     },
                                     child: const Image( image: AssetImage('assets/images/history.png')),
                                   ),
@@ -187,8 +162,7 @@ class _MainScreenState extends State<MainScreen> {
                             ),
                             const SizedBox(height: 5,),
                             SizedBox(
-                              height: 90,
-                              width: 90,
+                              height: 100,
                               child: Padding(
                                 padding: const EdgeInsets.all(10),
                                 child: ClipOval(
@@ -215,8 +189,7 @@ class _MainScreenState extends State<MainScreen> {
                             ),
                             const SizedBox(height: 5,),
                             SizedBox(
-                              height: 90,
-                              width: 90,
+                              height: 100,
                               child: Padding(
                                 padding: const EdgeInsets.all(10),
                                 child: ClipOval(
@@ -243,13 +216,72 @@ class _MainScreenState extends State<MainScreen> {
           ),
 
           //manual position with left, top, right, bottom
-              const Align(
-                alignment: Alignment.bottomCenter,
-                child:  Image( image: AssetImage('assets/images/bottom.png'),height: 40,width: double.infinity,fit: BoxFit.fill,),
-              ),
+          const Positioned(
+            left: 0,
+            right: 0,
+            bottom: 0,
+            //you can use "right" and "bottom" too
+            child: Image( image: AssetImage('assets/images/bottom.png')),
 
+          ),
 
         ]));
   }
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Scaffold(
+  //     backgroundColor: Colors.white,
+  //     body: SingleChildScrollView(
+  //       child: Column(
+  //         children: [
+  //           SafeArea(
+  //             child: Container(
+  //                 padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+  //                 margin: const EdgeInsets.fromLTRB(20, 10, 20, 10), // This will be the login form
+  //                 child: Column(
+  //                   children: [
+  //                     const Padding(
+  //                       padding: EdgeInsets.all(20.0),
+  //                       child: Image(
+  //                           image: AssetImage('assets/images/header.png')
+  //                       ),
+  //                     ),
+  //
+  //                     const SizedBox(height: 20.0),
+  //
+  //
+  //                     Row(
+  //                           children: [
+  //                             Column(
+  //                               children: const [
+  //                                 Text('Settings'),
+  //                                 Image(image: AssetImage('assets/images/settings.png'))
+  //                               ],
+  //                             ),
+  //                             Column(
+  //                               children: const [
+  //                                 Text('contacts'),
+  //                                 Image(image: AssetImage('assets/images/contacts.png'))
+  //                               ],
+  //                             ),
+  //                             Column(
+  //                               children: const [
+  //                                 Text('Bluetooth'),
+  //                                 Image(image: AssetImage('assets/images/ble.png'))
+  //                               ],
+  //                             ),
+  //
+  //                           ],
+  //                         )
+  //                   ],
+  //                 )),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
 
 }

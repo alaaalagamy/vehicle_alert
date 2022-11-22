@@ -2,10 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:dio/dio.dart';
+import 'package:vehicle_alert/commons/objects/alert.dart';
+import 'package:vehicle_alert/commons/objects/contact.dart';
 
 import 'objects/user.dart';
 
@@ -33,11 +34,16 @@ abstract class ApiClient {
   // @PUT("item/")
   // Future<bool> updateLabel({required String newData, required String id});
   //
-  // @POST("devices/")
-  // Future<bool> addDevice({required Map<String, String> data});
-  //
-  // @GET("devices/")
-  // Future<List<Device>> getDevices();
+
+  @GET("alerts/")
+  Future<List<Alert>> getAlerts(
+      @Header('Authorization') String token,
+      );
+
+  @GET("contacts/")
+  Future<List<Contact>> getContacts(
+      @Header('Authorization') String token,
+      );
 }
 @JsonSerializable()
 class SendDataSignup {
@@ -72,10 +78,12 @@ class SendDataLogin {
 
 @JsonSerializable()
 class UserLoginResponse {
+  String? token ;
   User? user;
 
   UserLoginResponse({
     this.user,
+    this.token,
   });
 
   factory UserLoginResponse.fromJson(Map<String, dynamic> json) => _$UserLoginResponseFromJson(json);
